@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView, Image } from "react-native";
-import { TextInput } from "react-native-paper";
+import { View, StyleSheet, SafeAreaView, Alert } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 
 import MetroSP from "./images/metro-sp";
 
@@ -28,6 +28,15 @@ export default function InitialPage() {
                         onChangeText={(password) => setPassword(password)}
                     />
                 </SafeAreaView>
+                <View style={styles.button}>
+                    <Button
+                        buttonColor="#1E90FF"
+                        mode="contained"
+                        onPress={() => console.log("Pressed")}
+                    >
+                        Logar
+                    </Button>
+                </View>
             </View>
         </View>
     );
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: "white",
-        height: 370,
+        height: 380,
         width: 370,
         justifyContent: "center",
         borderRadius: 35
@@ -50,5 +59,11 @@ const styles = StyleSheet.create({
     textInput: {
         height: 50,
         margin: 15
+    },
+    button: {
+        width: 130,
+        justifyContent: "center",
+        // alignItems: "center",
+        alignSelf: "center"
     }
 });
