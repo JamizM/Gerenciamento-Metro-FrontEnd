@@ -1,10 +1,18 @@
-import React from "react";
-import { View, StyleSheet, SafeAreaView, Alert } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { Link } from "expo-router";
+import * as React from "react";
+import {
+    View,
+    StyleSheet,
+    SafeAreaView,
+    Alert,
+    Pressable,
+    Text
+} from "react-native";
+import { TextInput } from "react-native-paper";
 
 import MetroSP from "./images/metro-sp";
 
-export default function InitialPage() {
+export default function InitialPage({ navigation }: { navigation: any }) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
@@ -28,14 +36,12 @@ export default function InitialPage() {
                         onChangeText={(password) => setPassword(password)}
                     />
                 </SafeAreaView>
-                <View style={styles.button}>
-                    <Button
-                        buttonColor="#1E90FF"
-                        mode="contained"
-                        onPress={() => console.log("Pressed")}
-                    >
-                        Logar
-                    </Button>
+                <View style={styles.buttonContainer}>
+                    <Link href="/MainPage" asChild>
+                        <Pressable>
+                            <Text style={styles.link}>Logar</Text>
+                        </Pressable>
+                    </Link>
                 </View>
             </View>
         </View>
@@ -60,10 +66,17 @@ const styles = StyleSheet.create({
         height: 50,
         margin: 15
     },
-    button: {
-        width: 130,
+    buttonContainer: {
+        width: 150,
+        height: 50,
         justifyContent: "center",
-        // alignItems: "center",
-        alignSelf: "center"
+        alignItems: "center",
+        alignSelf: "center",
+        backgroundColor: "#1E90FF",
+        borderRadius: 20
+    },
+    link: {
+        fontSize: 20,
+        color: "#fff"
     }
 });
