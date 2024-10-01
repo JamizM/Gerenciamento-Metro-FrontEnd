@@ -12,7 +12,7 @@ import { TextInput } from "react-native-paper";
 
 import MetroSP from "./images/metro-sp";
 
-export default function InitialPage({ navigation }: { navigation: any }) {
+export default function InitialPage() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
