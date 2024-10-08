@@ -1,13 +1,34 @@
 import axios from "axios";
+interface Extinguisher {
+    id: string; // Correspondente ao campo 'id'
 
+    extinguisherType: string; // Tipo de extintor, anotado como NotNull
+
+    capacity: number; // Capacidade do extintor, anotado como NotNull
+
+    manufacturerCode: string; // Código do fabricante (usando LocalDate), transformado para string
+
+    expirationDate: string; // Data de expiração, usando LocalDate (ISO format)
+
+    lastRechargeDate: string; // Data da última recarga, LocalDate
+
+    teamCode: number; // Código da equipe, NotNull
+
+    nextInspection: string; // Próxima inspeção, LocalDate
+
+    extinguisherStatus: string; // Status do extintor, NotNull
+
+    localization: string; // Relacionamento ManyToOne com Localization
+}
 // Função que recebe como parâmetro o id da localização no banco, ele puxa da api com o url parametrizado e devolve todos os dados, ou um erro,
 // então, após puxar os dados, tratá-los
 export default async function PuxarExtintoresPorEstacao(localizacao: String) {
     const url = `http://localhost:8080/api/Extinguishers?localization_id=${localizacao}`;
     try {
-        const response = await axios.get(url);
-        return response.data;
+        const response = await axios.get<Extinguisher[]>(url);
+        return response.data.length;
     } catch (error) {
-        return console.error("Erro ao buscar extintores:", error);
+        console.error("Erro ao buscar extintores:", error);
+        return 0;
     }
 }
