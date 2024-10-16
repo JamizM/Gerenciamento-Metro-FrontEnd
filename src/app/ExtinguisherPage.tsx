@@ -1,21 +1,38 @@
 import * as React from "react";
-import { Text, ScrollView, StyleSheet, View } from "react-native";
+import { Text, ScrollView, StyleSheet, View, Button } from "react-native";
 import { TextInput } from "react-native-paper";
 
+import cadastrarExtintor from "@/api/CadastrarExtintor";
+
 export default function ExtinguisherPage() {
-    const [patrimonio, setPatrimonio] = React.useState("");
-    const [equipe, setEquipe] = React.useState("");
-    const [tipo, setTipo] = React.useState("");
-    const [capacidade, setCapacidade] = React.useState("");
-    const [recarga, setRecarga] = React.useState("");
-    const [nsei, setNsei] = React.useState("");
-    const [fabricante, setFabricante] = React.useState("");
-    const [area, setArea] = React.useState("");
-    const [gerencia, setGerencia] = React.useState("");
-    const [setor, setSetor] = React.useState("");
-    const [predio, setPredio] = React.useState("");
-    const [local, setLocal] = React.useState("");
-    const [inmetro, setInmetro] = React.useState("");
+    const [id, setId] = React.useState("");
+    const [extinguisherType, setExtinguisherType] = React.useState("");
+    const [capacity, setCapacity] = React.useState("");
+    const [manufacturerCode, setManufacturerCode] = React.useState("");
+    const [expirationDate, setExpirationDate] = React.useState("");
+    const [lastRechargeDate, setLastRechargeDate] = React.useState("");
+    const [teamCode, setTeamCode] = React.useState("");
+    const [nextInspection, setNextInspection] = React.useState("");
+    const [extinguisherStatus, setExtinguisherStatus] = React.useState("");
+
+    const objeto = {
+        id,
+        extinguisherType,
+        capacity,
+        manufacturerCode,
+        expirationDate,
+        lastRechargeDate,
+        teamCode,
+        nextInspection,
+        extinguisherStatus
+    };
+    const handlePress = async () => {
+        try {
+            await cadastrarExtintor(objeto); // Chama a função já existente cadastrarExtintor
+        } catch (error) {
+            console.log("Erro ao cadastrar o extintor:", error);
+        }
+    };
 
     return (
         <>
@@ -26,94 +43,74 @@ export default function ExtinguisherPage() {
                     mode="outlined"
                     label="Codigo de Patrimonio"
                     style={styles.localInput}
-                    value={patrimonio}
-                    onChangeText={(patrimonio) => setPatrimonio(patrimonio)}
+                    value={id}
+                    onChangeText={(patrimonio) => setId(patrimonio)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Codigo de Equipe"
+                    label="Tipo de extintor"
                     style={styles.localInput}
-                    value={equipe}
-                    onChangeText={(equipe) => setEquipe(equipe)}
+                    value={extinguisherType}
+                    onChangeText={(equipe) => setExtinguisherType(equipe)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Tipo de Extintor"
+                    label="Capacidade"
                     style={styles.localInput}
-                    value={tipo}
-                    onChangeText={(tipo) => setTipo(tipo)}
+                    value={capacity}
+                    onChangeText={(tipo) => setCapacity(tipo)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Capacidade do Extintor"
+                    label="Código de manufatura"
                     style={styles.localInput}
-                    value={capacidade}
-                    onChangeText={(capacidade) => setCapacidade(capacidade)}
+                    value={manufacturerCode}
+                    onChangeText={(capacidade) =>
+                        setManufacturerCode(capacidade)
+                    }
                 />
                 <TextInput
                     mode="outlined"
-                    label="Proxima Recarga / Manutenção"
+                    label="Datade expiração"
                     style={styles.localInput}
-                    value={recarga}
-                    onChangeText={(recarga) => setRecarga(recarga)}
+                    value={expirationDate}
+                    onChangeText={(nsei) => setExpirationDate(nsei)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Não sei ainda"
+                    label="Data do último Carregamento"
                     style={styles.localInput}
-                    value={nsei}
-                    onChangeText={(nsei) => setNsei(nsei)}
+                    value={lastRechargeDate}
+                    onChangeText={(fabricante) =>
+                        setLastRechargeDate(fabricante)
+                    }
                 />
                 <TextInput
                     mode="outlined"
-                    label="Fabricante"
+                    label="Código do time"
                     style={styles.localInput}
-                    value={fabricante}
-                    onChangeText={(fabricante) => setFabricante(fabricante)}
+                    value={teamCode}
+                    onChangeText={(area) => setTeamCode(area)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Area"
+                    label="Próxima inspeção"
                     style={styles.localInput}
-                    value={area}
-                    onChangeText={(area) => setArea(area)}
+                    value={nextInspection}
+                    onChangeText={(gerencia) => setNextInspection(gerencia)}
                 />
                 <TextInput
                     mode="outlined"
-                    label="Gerencia"
+                    label="Status do extintor"
                     style={styles.localInput}
-                    value={gerencia}
-                    onChangeText={(gerencia) => setGerencia(gerencia)}
-                />
-                <TextInput
-                    mode="outlined"
-                    label="Setor"
-                    style={styles.localInput}
-                    value={setor}
-                    onChangeText={(setor) => setSetor(setor)}
-                />
-                <TextInput
-                    mode="outlined"
-                    label="Predio"
-                    style={styles.localInput}
-                    value={predio}
-                    onChangeText={(predio) => setPredio(predio)}
-                />
-                <TextInput
-                    mode="outlined"
-                    label="Local"
-                    style={styles.localInput}
-                    value={local}
-                    onChangeText={(local) => setLocal(local)}
-                />
-                <TextInput
-                    mode="outlined"
-                    label="Selo Inmetro"
-                    style={styles.localInput}
-                    value={inmetro}
-                    onChangeText={(inmetro) => setInmetro(inmetro)}
+                    value={extinguisherStatus}
+                    onChangeText={(setor) => setExtinguisherStatus(setor)}
                 />
             </ScrollView>
+            <Button
+                title="Cadastrar Extintor"
+                onPress={handlePress} // Chama handlePress que por sua vez chama cadastrarExtintor
+            />
         </>
     );
 }
