@@ -1,3 +1,4 @@
+import { int } from "@zxing/library/esm/customTypings";
 import axios from "axios";
 interface Extinguisher {
     id: string; // Correspondente ao campo 'id'
@@ -20,31 +21,27 @@ interface Extinguisher {
 
     localization: string; // Relacionamento ManyToOne com Localization
 }
-interface ExtinguisherResponse {
-    _embedded: {
-        extinguishers: Extinguisher[];
-    };
-}
+
 // Função que recebe como parâmetro o id da localização no banco, ele puxa da api com o url parametrizado e devolve todos os dados, ou um erro,
 // então, após puxar os dados, tratá-los
-export default async function PuxarExtintoresPorEstacao() {
+export default async function PuxarExtintoresPorEstacao(localizacao: int) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://localhost:8080/api/Extinguishers/`;
+    const url = `http://localhost:8080/api/Extinguishers?localization=${localizacao}`;
     try {
-        const response = await axios.get<ExtinguisherResponse>(url, {
+        const response = await axios.get(url, {
             headers: {
                 Authorization: `Basic ${base64Credentials}`,
                 "Content-Type": "application/json"
             }
         });
-
-        return response.data._embedded.extinguishers.length;
+        const extinguishers: any = response.data || [];
+        return extinguishers.length;
     } catch (error) {
         console.error("Erro ao buscar extintores:", error);
         return 0;
     }
 }
 
-PuxarExtintoresPorEstacao().then((result) => {
+PuxarExtintoresPorEstacao(1).then((result) => {
     console.log("Quantidade de extintores:", result);
 });

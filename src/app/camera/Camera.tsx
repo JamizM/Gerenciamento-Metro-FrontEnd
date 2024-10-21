@@ -1,5 +1,5 @@
 import { BrowserMultiFormatReader } from "@zxing/library";
-import { useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 
 export default function QRCodeScanner() {

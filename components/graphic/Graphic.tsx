@@ -4,8 +4,8 @@ import { VictoryChart, VictoryLine } from "victory-native";
 import PuxarExtintoresPorEstacao from "@/api/PuxarExtintoresPorEstacao";
 
 const sampleData = [
-    { x: "Jabaquara", y: PuxarExtintoresPorEstacao("1") },
-    { x: "Tucuruvi", y: PuxarExtintoresPorEstacao("2") }
+    { x: "Jabaquara", y: PuxarExtintoresPorEstacao(1) },
+    { x: "Tucuruvi", y: PuxarExtintoresPorEstacao(2) }
 ];
 
 export default function MyChart() {
