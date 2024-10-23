@@ -1,6 +1,7 @@
+import { router } from "expo-router";
 import * as React from "react";
 import { Text, ScrollView, StyleSheet, View, Button } from "react-native";
-import { TextInput } from "react-native-paper";
+import { TextInput, IconButton } from "react-native-paper";
 
 import cadastrarExtintor from "@/api/CadastrarExtintor";
 
@@ -36,7 +37,13 @@ export default function ExtinguisherPage() {
 
     return (
         <>
-            <Text style={styles.tittle}>Extintor</Text>
+            <View style={styles.header}>
+                <IconButton
+                    icon="arrow-left"
+                    onPress={() => console.log(router.navigate("/MainPage"))}
+                />
+                <Text style={styles.tittle}>Extintor</Text>
+            </View>
             <View style={styles.line} />
             <ScrollView>
                 <TextInput
@@ -116,10 +123,18 @@ export default function ExtinguisherPage() {
 }
 
 const styles = StyleSheet.create({
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 10,
+        position: "relative"
+    },
     tittle: {
         color: "black",
         fontSize: 30,
-        alignSelf: "center"
+        position: "absolute",
+        left: "50%",
+        transform: [{ translateX: -45 }]
     },
     line: {
         height: 1,
@@ -132,5 +147,6 @@ const styles = StyleSheet.create({
         width: "80%",
         alignSelf: "center",
         marginTop: 20
-    }
+    },
+    back: {}
 });

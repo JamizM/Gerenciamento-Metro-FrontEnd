@@ -60,26 +60,32 @@ const styles = StyleSheet.create({
         backgroundColor: "#003DA5"
     },
     buttonGroup: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         paddingHorizontal: 30,
-        paddingTop: 20
+        paddingTop: 20,
+        paddingVertical: 6
     },
     buttonContainer: {
         flexDirection: "row",
         flexWrap: "wrap",
         padding: 10,
-        width: 150,
-        height: 50,
+        width: 250,
+        height: 100,
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
         backgroundColor: "#1E90FF",
         borderRadius: 20,
-        marginHorizontal: 5
+        marginVertical: 10
     },
     link: {
-        fontSize: 20,
-        color: "#fff"
+        fontSize: 35,
+        color: "#fff",
+        textAlign: "center",
+        textAlignVertical: "center",
+        height: "100%",
+        width: "100%"
     }
 });
