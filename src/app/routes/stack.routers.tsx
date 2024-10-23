@@ -7,6 +7,7 @@ export default function Nav() {
             <Stack.Screen name="mainpage" />
             <Stack.Screen name="extinguisherpage" />
             <Stack.Screen name="reportpage" />
+            <Stack.Screen name="camerapage" />
         </Stack>
     );
 }

@@ -38,6 +38,15 @@ export default function MainPage() {
                                 </Pressable>
                             </Link>
                         </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/CameraPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>
+                                        QR Code Scan
+                                    </Text>
+                                </Pressable>
+                            </Link>
+                        </View>
                     </View>
                 </View>
             </View>
