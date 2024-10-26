@@ -47,6 +47,15 @@ export default function MainPage() {
                                 </Pressable>
                             </Link>
                         </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/findextinguisherbyfilter" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>
+                                        Buscar Extintores
+                                    </Text>
+                                </Pressable>
+                            </Link>
+                        </View>
                     </View>
                 </View>
             </View>

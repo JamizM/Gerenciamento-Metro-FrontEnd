@@ -11,24 +11,54 @@ import {
 } from "react-native-paper";
 
 import FindExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
+interface Extinguisher {
+    id: string; // Correspondente ao campo 'id'
 
-const MyComponent = async () => {
+    extinguisherType: string; // Tipo de extintor, anotado como NotNull
+
+    capacity: number; // Capacidade do extintor, anotado como NotNull
+
+    manufacturerCode: string; // Código do fabricante (usando LocalDate), transformado para string
+
+    expirationDate: string; // Data de expiração, usando LocalDate (ISO format)
+
+    lastRechargeDate: string; // Data da última recarga, LocalDate
+
+    teamCode: number; // Código da equipe, NotNull
+
+    nextInspection: string; // Próxima inspeção, LocalDate
+
+    extinguisherStatus: string; // Status do extintor, NotNull
+
+    localization: string; // Relacionamento ManyToOne com Localization
+}
+const allQuerys: Extinguisher[] = [];
+
+const Filtro = () => {
     const [visible, setVisible] = React.useState(false);
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
+
     const containerStyle = { backgroundColor: "white", padding: 20 };
+
     const [checked1, setChecked1] = useState(false);
     const [checked2, setChecked2] = useState(false);
     const [checked3, setChecked3] = useState(false);
     const [checked4, setChecked4] = useState(false);
+
     const setWhatToQuery = new Set<String>();
+
     async function queryingEachCheckbox() {
-        const allQuerys = [];
         for (const querys in setWhatToQuery) {
-            const response = await FindExtinguisherByStatus(querys);
-            allQuerys.push(response);
+            const response = (await FindExtinguisherByStatus(
+                querys
+            )) as Extinguisher[];
+            allQuerys.push(...response);
+            response.length = 0;
         }
+        setWhatToQuery.clear();
+        console.log(allQuerys);
         return allQuerys;
     }
     return (
@@ -117,14 +147,10 @@ const MyComponent = async () => {
     );
 };
 
-export default async function FindExtinguisherByStatusPage() {
+export default function FindExtinguisherByFilter() {
     return (
-        <Button
-            icon="camera"
-            mode="contained"
-            onPress={() => console.log("Pressed")}
-        >
-            Press me
-        </Button>
+        <View style={{ flex: 1 }}>
+            <Filtro />
+        </View>
     );
 }
