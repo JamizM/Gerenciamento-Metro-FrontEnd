@@ -48,7 +48,7 @@ export default function MainPage() {
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/findextinguisherbyfilter" asChild>
+                            <Link href="/FindExtinguisherByFilter" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>
                                         Buscar Extintores

@@ -26,7 +26,7 @@ interface Extinguisher {
 // então, após puxar os dados, tratá-los
 export default async function PuxarExtintoresPorEstacao(localizacao: int) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://localhost:8080/api/Extinguishers?localization=${localizacao}`;
+    const url = `http://192.168.0.55:8080/api/Extinguishers?localization=${localizacao}`;
     try {
         const response = await axios.get(url, {
             headers: {
@@ -37,11 +37,7 @@ export default async function PuxarExtintoresPorEstacao(localizacao: int) {
         const extinguishers: any = response.data || [];
         return extinguishers.length;
     } catch (error) {
-        console.error("Erro ao buscar extintores:", error);
+        console.log(error);
         return 0;
     }
 }
-
-PuxarExtintoresPorEstacao(1).then((result) => {
-    console.log("Quantidade de extintores:", result);
-});

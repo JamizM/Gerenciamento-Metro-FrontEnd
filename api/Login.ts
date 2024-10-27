@@ -7,7 +7,7 @@ interface User {
     password?: string;
 }
 export default async function Login(emailUser: string, passwordUser: string) {
-    const url = `http://localhost:8080/api/Users?email=${emailUser}`;
+    const url = `http://192.168.0.55:8080/api/Users?email=${emailUser}`;
     const base64Credentials = btoa("Admin:Admin");
 
     try {
@@ -34,7 +34,7 @@ export default async function Login(emailUser: string, passwordUser: string) {
             return false;
         }
     } catch (error) {
-        console.error("Erro ao buscar Usuário:", error);
+        console.log(error);
         return false;
     }
 }

@@ -8,7 +8,7 @@ export default function Nav() {
             <Stack.Screen name="extinguisherpage" />
             <Stack.Screen name="reportpage" />
             <Stack.Screen name="camerapage" />
-            <Stack.Screen name="findextinguisherbyfilter" />
+            <Stack.Screen name="FindExtinguisherByFilter" />
         </Stack>
     );
 }
