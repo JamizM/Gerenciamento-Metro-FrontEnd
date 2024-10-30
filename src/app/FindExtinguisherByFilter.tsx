@@ -15,6 +15,7 @@ import {
 
 import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
 import findExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
+import findExtinguisherBySublocalization from "@/api/FindExtinguisherBySubLocalization";
 
 interface Extinguisher {
     id: string;
@@ -56,6 +57,12 @@ export default function FindExtinguisherByFilter() {
         )) as Extinguisher[];
         console.log(response);
     }
+    async function handleTextInputSublocation(localization: String) {
+        const response = (await findExtinguisherBySublocalization(
+            localization
+        )) as Extinguisher[];
+        console.log(response);
+    }
 
     return (
         <>
@@ -78,7 +85,7 @@ export default function FindExtinguisherByFilter() {
                 <IconButton
                     icon="filter-variant"
                     size={50}
-                    onPress={() => showModal()}
+                    onPress={() => handleTextInputSublocation(text)}
                     style={{ position: "absolute", right: 0, marginTop: 10 }}
                 />
             </View>
