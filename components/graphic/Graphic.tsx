@@ -1,7 +1,7 @@
 import React, { View } from "react-native";
 import { VictoryChart, VictoryLine } from "victory-native";
 
-import PuxarExtintoresPorEstacao from "@/api/PuxarExtintoresPorEstacao";
+import PuxarExtintoresPorEstacao from "@/api/FindExtinguisherbyLocation";
 
 const sampleData = [
     { x: "Jabaquara", y: PuxarExtintoresPorEstacao(1) },

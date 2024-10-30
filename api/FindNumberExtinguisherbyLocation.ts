@@ -23,9 +23,9 @@ interface Extinguisher {
 
 // Função que recebe como parâmetro o id da localização no banco, ele puxa da api com o url parametrizado e devolve todos os dados, ou um erro,
 // então, após puxar os dados, tratá-los
-export default async function findExtinguisherByStatus(condicao: String) {
+export default async function findExtinguisherByLocation(localizacao: Number) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://192.168.0.55:8080/api/Extinguishers/Search-Extinguisher-By-Status?extinguisherStatus=${condicao}`;
+    const url = `http://192.168.0.55:8080/api/Extinguishers?localization=${localizacao}`;
     try {
         const response = await axios.get(url, {
             headers: {
@@ -33,9 +33,10 @@ export default async function findExtinguisherByStatus(condicao: String) {
                 "Content-Type": "application/json"
             }
         });
-
-        return response.data;
+        const extinguishers: any = response.data || [];
+        return extinguishers.length;
     } catch (error) {
+        console.log(error);
         return 0;
     }
 }

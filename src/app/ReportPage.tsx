@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { ScrollView, View, Text, Button } from "react-native";
 import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
 
-import PuxarExtintoresPorEstacao from "@/api/PuxarExtintoresPorEstacao";
+import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
 
 export default function Report() {
     const [selectedReport, setSelectedReport] = useState(null);
 
     const quantidadeExtintores = [
-        { month: "Jabaquara", value: PuxarExtintoresPorEstacao(1) },
-        { month: "Tucuruvi", value: PuxarExtintoresPorEstacao(2) }
+        { month: "Jabaquara", value: findExtinguisherByLocalization(1) },
+        { month: "Tucuruvi", value: findExtinguisherByLocalization(2) }
     ];
 
     const StatusExtintor = [

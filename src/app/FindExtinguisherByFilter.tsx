@@ -7,12 +7,14 @@ import {
     Portal,
     Text,
     Button,
+    TextInput,
     PaperProvider,
     Checkbox,
     IconButton
 } from "react-native-paper";
 
-import FindExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
+import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
+import findExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
 
 interface Extinguisher {
     id: string;
@@ -33,16 +35,26 @@ export default function FindExtinguisherByFilter() {
     const [checked2, setChecked2] = useState(false);
     const [checked3, setChecked3] = useState(false);
     const [checked4, setChecked4] = useState(false);
+    const [checked5, setChecked5] = useState(false);
+    const [checked6, setChecked6] = useState(false);
+
+    const [text, setText] = useState("");
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
 
-    async function handleCheckboxClick(status: string) {
-        const response = (await FindExtinguisherByStatus(
+    async function handleCheckboxStatus(status: string) {
+        const response = (await findExtinguisherByStatus(
             status
         )) as Extinguisher[];
         console.log(response);
         hideModal();
+    }
+    async function handleCheckboxLocalization(localization: Number) {
+        const response = (await findExtinguisherByLocalization(
+            localization
+        )) as Extinguisher[];
+        console.log(response);
     }
 
     return (
@@ -55,6 +67,30 @@ export default function FindExtinguisherByFilter() {
                 <Text style={styles.title}>Extintor</Text>
             </View>
             <View style={styles.line} />
+            <View>
+                <TextInput
+                    mode="outlined"
+                    label="Sublocalização"
+                    style={styles.textInput}
+                    value={text}
+                    onChangeText={(text) => setText(text)}
+                />
+                <IconButton
+                    icon="filter-variant"
+                    size={50}
+                    onPress={() => showModal()}
+                    style={{ position: "absolute", right: 0, marginTop: 10 }}
+                />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button
+                    style={{ width: 300, marginLeft: 15, borderRadius: 12 }}
+                    onPress={showModal}
+                >
+                    <Text style={{ color: "white" }}> Buscar Extintores </Text>
+                </Button>
+            </View>
+
             <PaperProvider>
                 <View
                     style={{
@@ -63,13 +99,6 @@ export default function FindExtinguisherByFilter() {
                         backgroundColor: "white"
                     }}
                 >
-                    <View style={styles.buttonContainer}>
-                        <Pressable>
-                            <Button style={styles.link} onPress={showModal}>
-                                Buscar extintor
-                            </Button>
-                        </Pressable>
-                    </View>
                     <Portal>
                         <Modal
                             visible={visible}
@@ -80,7 +109,7 @@ export default function FindExtinguisherByFilter() {
                             }}
                         >
                             <Text style={{ color: "Black" }}>
-                                Selecione o tipo do status do extintor
+                                Status do extintor
                             </Text>
                             <TouchableOpacity
                                 style={{
@@ -90,11 +119,17 @@ export default function FindExtinguisherByFilter() {
                                 onPress={() => {
                                     const newChecked1 = !checked1;
                                     setChecked1(newChecked1);
-                                    if (newChecked1) handleCheckboxClick("OK");
+                                    setChecked2(false);
+                                    setChecked3(false);
+                                    setChecked4(false);
+                                    setChecked5(false);
+                                    setChecked6(false);
+                                    if (newChecked1) handleCheckboxStatus("OK");
                                 }}
                             >
                                 <Checkbox
                                     status={checked1 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
                                 />
                                 <Text style={{ color: "Black" }}>
                                     Extintores Regularizados
@@ -108,12 +143,18 @@ export default function FindExtinguisherByFilter() {
                                 onPress={() => {
                                     const newChecked2 = !checked2;
                                     setChecked2(newChecked2);
+                                    setChecked1(false);
+                                    setChecked3(false);
+                                    setChecked4(false);
+                                    setChecked5(false);
+                                    setChecked6(false);
                                     if (newChecked2)
-                                        handleCheckboxClick("EXPIRED");
+                                        handleCheckboxStatus("EXPIRED");
                                 }}
                             >
                                 <Checkbox
                                     status={checked2 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
                                 />
                                 <Text style={{ color: "Black" }}>
                                     Extintores Expirados
@@ -127,12 +168,18 @@ export default function FindExtinguisherByFilter() {
                                 onPress={() => {
                                     const newChecked3 = !checked3;
                                     setChecked3(newChecked3);
+                                    setChecked2(false);
+                                    setChecked1(false);
+                                    setChecked4(false);
+                                    setChecked5(false);
+                                    setChecked6(false);
                                     if (newChecked3)
-                                        handleCheckboxClick("MISPLACED");
+                                        handleCheckboxStatus("MISPLACED");
                                 }}
                             >
                                 <Checkbox
                                     status={checked3 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
                                 />
                                 <Text style={{ color: "Black" }}>
                                     Extintores Perdidos
@@ -146,24 +193,92 @@ export default function FindExtinguisherByFilter() {
                                 onPress={() => {
                                     const newChecked4 = !checked4;
                                     setChecked4(newChecked4);
+                                    setChecked2(false);
+                                    setChecked3(false);
+                                    setChecked1(false);
+                                    setChecked5(false);
+                                    setChecked6(false);
                                     if (newChecked4)
-                                        handleCheckboxClick("MAINTENANCE");
+                                        handleCheckboxStatus("MAINTENANCE");
                                 }}
                             >
                                 <Checkbox
                                     status={checked4 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
                                 />
                                 <Text style={{ color: "Black" }}>
                                     Extintores em Manutenção
                                 </Text>
                             </TouchableOpacity>
+                            <View style={styles.line} />
+                            <Text style={{ color: "Black" }}>
+                                Localização do extintor
+                            </Text>
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    marginTop: 10
+                                }}
+                                onPress={() => {
+                                    const newChecked5 = !checked5;
+                                    setChecked5(newChecked5);
+                                    setChecked2(false);
+                                    setChecked3(false);
+                                    setChecked4(false);
+                                    setChecked1(false);
+                                    setChecked6(false);
+                                    if (newChecked5)
+                                        handleCheckboxLocalization(1);
+                                }}
+                            >
+                                <Checkbox
+                                    status={checked5 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
+                                />
+                                <Text style={{ color: "Black" }}>
+                                    Extintores no Jabaquara
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: "row",
+                                    alignItems: "center"
+                                }}
+                                onPress={() => {
+                                    const newChecked6 = !checked6;
+                                    setChecked6(newChecked6);
+                                    setChecked2(false);
+                                    setChecked3(false);
+                                    setChecked4(false);
+                                    setChecked5(false);
+                                    setChecked1(false);
+                                    if (newChecked6)
+                                        handleCheckboxLocalization(2);
+                                }}
+                            >
+                                <Checkbox
+                                    status={checked6 ? "checked" : "unchecked"}
+                                    color="#1E90FF"
+                                />
+                                <Text style={{ color: "Black" }}>
+                                    Extintores no Tucuruvi
+                                </Text>
+                            </TouchableOpacity>
+
                             <View style={styles.buttonContainer}>
                                 <Pressable>
                                     <Button
-                                        style={styles.link}
                                         onPress={hideModal}
+                                        style={{
+                                            width: 300,
+                                            marginLeft: 15,
+                                            borderRadius: 12
+                                        }}
                                     >
-                                        Fechar
+                                        <Text style={{ color: "white" }}>
+                                            Fechar{" "}
+                                        </Text>
                                     </Button>
                                 </Pressable>
                             </View>
@@ -186,6 +301,11 @@ const styles = StyleSheet.create({
         padding: 10,
         position: "relative"
     },
+    textInput: {
+        height: 40,
+        width: 300,
+        margin: 15
+    },
     title: {
         color: "black",
         fontSize: 30,
@@ -197,6 +317,7 @@ const styles = StyleSheet.create({
         height: 1,
         backgroundColor: "black",
         marginTop: 10,
+        marginBottom: 10,
         width: "80%",
         alignSelf: "center"
     },
@@ -204,20 +325,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         padding: 10,
-        width: 180,
+        width: 300,
+        borderRadius: 12,
         height: 60,
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
         backgroundColor: "#1E90FF",
         marginVertical: 10
-    },
-    link: {
-        fontSize: 50,
-        color: "#ffffff",
-        textAlign: "center",
-        textAlignVertical: "center",
-        height: "100%",
-        width: "100%"
     }
 });
