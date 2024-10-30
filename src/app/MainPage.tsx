@@ -25,7 +25,7 @@ export default function MainPage() {
 
                     <View style={styles.buttonGroup}>
                         <View style={styles.buttonContainer}>
-                            <Link href="/ExtinguisherPage" asChild>
+                            <Link href="/LocationPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Extintores</Text>
                                 </Pressable>
