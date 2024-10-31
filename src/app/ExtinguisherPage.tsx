@@ -5,7 +5,7 @@ import { Text, StyleSheet, View, Button } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { TextInput, IconButton } from "react-native-paper";
 
-import cadastrarExtintor from "@/api/CadastrarExtintor";
+import cadastrarExtintor from "@/api/extintores/CadastrarExtintor";
 
 export default function ExtinguisherPage() {
     const [openTypeDropdown, setOpenTypeDropdown] = useState(false);

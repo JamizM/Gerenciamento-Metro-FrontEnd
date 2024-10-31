@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { IconButton } from "react-native-paper";
 
-import GerarQrCodePorExtintor from "@/api/GerarQRCode";
+import GerarQrCodePorExtintor from "@/api/extintores/GerarQRCode";
 
 const QRCodeGenerator = () => {
     const [extinguisherId, setExtinguisherId] = useState("");
@@ -61,7 +61,7 @@ const QRCodeGenerator = () => {
             <View style={styles.header}>
                 <IconButton
                     icon="arrow-left"
-                    size={20} // Diminui o ícone
+                    size={20}
                     onPress={() => navigation.goBack()}
                 />
                 <Text style={styles.title}>Gerar QR Code Extintor</Text>
