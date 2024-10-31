@@ -1,15 +1,17 @@
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useState } from "react";
 import {
     View,
     Text,
     TextInput,
-    Button,
+    TouchableOpacity,
     Image,
     Alert,
     StyleSheet,
     Linking
 } from "react-native";
+import { IconButton } from "react-native-paper";
 
 import GerarQrCodePorExtintor from "@/api/GerarQRCode";
 
@@ -17,6 +19,7 @@ const QRCodeGenerator = () => {
     const [extinguisherId, setExtinguisherId] = useState("");
     const [qrcode, setQrCode] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const navigation = useNavigation();
 
     const handleGenerateQRCode = async () => {
         if (extinguisherId) {
@@ -31,7 +34,7 @@ const QRCodeGenerator = () => {
                 } else {
                     setQrCode(null);
                     setError(
-                        "Erro ao gerar o QR Code, vefirique o patrimonio do extintor."
+                        "Erro ao gerar o QR Code, verifique o patrimônio do extintor."
                     );
                 }
             } catch (err) {
@@ -41,21 +44,30 @@ const QRCodeGenerator = () => {
         } else {
             Alert.alert(
                 "Atenção",
-                "Por favor, insira o patrimonio do extintor."
+                "Por favor, insira o patrimônio do extintor."
             );
         }
     };
 
     const handleOpenURL = () => {
-        const url = `http://192.168.0.41:8080/api/Extinguishers/${extinguisherId}/qrcode`;
+        const url = `http://10.2.128.58/api/Extinguishers/${extinguisherId}/qrcode`;
         Linking.openURL(url).catch((err) =>
             console.error("Erro ao abrir URL:", err)
         );
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Gerar QR Code Extintor</Text>
+        <>
+            <View style={styles.header}>
+                <IconButton
+                    icon="arrow-left"
+                    size={20} // Diminui o ícone
+                    onPress={() => navigation.goBack()}
+                />
+                <Text style={styles.title}>Gerar QR Code Extintor</Text>
+            </View>
+
+            <View style={styles.line} />
 
             <TextInput
                 style={styles.input}
@@ -64,7 +76,12 @@ const QRCodeGenerator = () => {
                 onChangeText={setExtinguisherId}
             />
 
-            <Button title="Gerar QR Code" onPress={handleGenerateQRCode} />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={handleGenerateQRCode}
+            >
+                <Text style={styles.buttonText}>Gerar QR Code</Text>
+            </TouchableOpacity>
 
             {error && <Text style={styles.errorText}>{error}</Text>}
 
@@ -74,24 +91,24 @@ const QRCodeGenerator = () => {
                         source={{ uri: `data:image/png;base64,${qrcode}` }}
                         style={styles.qrCodeImage}
                     />
-                    <Button title="Baixar Arquivo" onPress={handleOpenURL} />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={handleOpenURL}
+                    >
+                        <Text style={styles.buttonText}>Baixar Arquivo</Text>
+                    </TouchableOpacity>
                 </View>
             )}
-        </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 20
-    },
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        marginBottom: 20
+        flex: 1,
+        textAlign: "center"
     },
     input: {
         height: 40,
@@ -99,15 +116,26 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingHorizontal: 10,
         marginBottom: 20,
-        width: "100%"
+        width: "80%",
+        alignSelf: "center",
+        marginTop: 20 // Cria espaço entre o título e o input
+    },
+    button: {
+        backgroundColor: "#007bff",
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 5,
+        alignSelf: "center",
+        marginVertical: 10
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "bold"
     },
     qrCodeContainer: {
         marginTop: 20,
         alignItems: "center"
-    },
-    qrCodeText: {
-        fontSize: 18,
-        marginBottom: 10
     },
     qrCodeImage: {
         width: 350,
@@ -116,6 +144,19 @@ const styles = StyleSheet.create({
     errorText: {
         color: "red",
         marginTop: 8
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 10,
+        position: "relative"
+    },
+    line: {
+        height: 1,
+        backgroundColor: "black",
+        marginTop: 10,
+        width: "80%",
+        alignSelf: "center"
     }
 });
 
