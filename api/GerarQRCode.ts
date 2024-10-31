@@ -1,20 +1,35 @@
 import axios from "axios";
+import { Buffer } from "buffer";
 
-export default async function cadastrarExtintor(objetoExtintor: Object) {
+async function GerarQrCodePorExtintor(extinguisherId: string) {
     const base64Credentials = btoa("Admin:Admin");
-    try {
-        const response = await axios.post(
-            "http://192.168.0.41:8080/api/Extinguishers",
-            objetoExtintor,
-            {
-                headers: {
-                    Authorization: `Basic ${base64Credentials}`,
-                    "Content-Type": "application/json"
-                }
-            }
-        );
+    const url = `http://192.168.0.41:8080/api/Extinguishers/${extinguisherId}/qrcode`;
 
-        console.log("Enviado com sucesso: " + response.statusText);
+    console.log("ID do extintor:", extinguisherId);
+
+    try {
+        const response = await axios.get(url, {
+            responseType: "arraybuffer",
+            headers: {
+                Authorization: `Basic ${base64Credentials}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.data instanceof ArrayBuffer) {
+            const bytes = new Uint8Array(response.data);
+            const binaryString = bytes.reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                ""
+            );
+            const qrcode = Buffer.from(binaryString, "binary").toString(
+                "base64"
+            );
+            return qrcode;
+        } else {
+            console.error("Formato de resposta inesperado:", response.data);
+            return null;
+        }
     } catch (error: unknown) {
         // Definindo o tipo do erro como unknown
         // Verificando se o erro possui a propriedade 'response'
@@ -40,3 +55,5 @@ export default async function cadastrarExtintor(objetoExtintor: Object) {
         }
     }
 }
+
+export default GerarQrCodePorExtintor;

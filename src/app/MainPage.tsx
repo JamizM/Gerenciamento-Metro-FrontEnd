@@ -47,6 +47,17 @@ export default function MainPage() {
                                 </Pressable>
                             </Link>
                         </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/GenerateQRCodePage" asChild>
+                                <Pressable>
+                                    <Text>
+                                        <Text style={styles.link}>
+                                            Gerar QR
+                                        </Text>
+                                    </Text>
+                                </Pressable>
+                            </Link>
+                        </View>
                     </View>
                 </View>
             </View>
