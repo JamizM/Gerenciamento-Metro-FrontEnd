@@ -1,11 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { ScrollView, View, Text, Button } from "react-native";
+import { ScrollView, View, Text, Button, StyleSheet } from "react-native";
+import { IconButton } from "react-native-paper";
 import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
 
-import PuxarExtintoresPorEstacao from "@/api/PuxarExtintoresPorEstacao";
+import PuxarExtintoresPorEstacao from "@/api/extintores/PuxarExtintoresPorEstacao";
 
 export default function Report() {
     const [selectedReport, setSelectedReport] = useState(null);
+    const navigation = useNavigation();
 
     const quantidadeExtintores = [
         { month: "Jabaquara", value: PuxarExtintoresPorEstacao(1) },
@@ -55,6 +58,17 @@ export default function Report() {
 
     return (
         <ScrollView>
+            <View style={styles.header}>
+                <IconButton
+                    icon="arrow-left"
+                    size={30}
+                    onPress={() => navigation.goBack()}
+                />
+                <Text style={styles.title}>Relatórios</Text>
+            </View>
+
+            <View style={styles.line} />
+
             <View style={{ alignItems: "center", marginTop: 20 }}>
                 <View
                     style={{
@@ -115,3 +129,24 @@ export default function Report() {
         </ScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        fontWeight: "bold",
+        flex: 1
+    },
+    header: {
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 10,
+        position: "relative"
+    },
+    line: {
+        height: 1,
+        backgroundColor: "black",
+        marginTop: 10,
+        width: "80%",
+        alignSelf: "center"
+    }
+});

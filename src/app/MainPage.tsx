@@ -25,7 +25,7 @@ export default function MainPage() {
 
                     <View style={styles.buttonGroup}>
                         <View style={styles.buttonContainer}>
-                            <Link href="/LocationPage" asChild>
+                            <Link href="/SecondExtinguisherPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Extintores</Text>
                                 </Pressable>
@@ -34,16 +34,21 @@ export default function MainPage() {
                         <View style={styles.buttonContainer}>
                             <Link href="/ReportPage" asChild>
                                 <Pressable>
-                                    <Text style={styles.link}>Reportes</Text>
+                                    <Text style={styles.link}>Relatórios</Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/CameraPage" asChild>
+                            <Link href="/#" asChild>
                                 <Pressable>
-                                    <Text style={styles.link}>
-                                        QR Code Scan
-                                    </Text>
+                                    <Text style={styles.link}>Exemplo</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/#" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Exemplo</Text>
                                 </Pressable>
                             </Link>
                         </View>
