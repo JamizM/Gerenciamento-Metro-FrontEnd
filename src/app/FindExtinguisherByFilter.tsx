@@ -1,7 +1,14 @@
+import Integer from "@zxing/library/esm/core/util/Integer";
 import { router } from "expo-router";
 import * as React from "react";
 import { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Pressable } from "react-native";
+import {
+    View,
+    TouchableOpacity,
+    StyleSheet,
+    Pressable,
+    ScrollView
+} from "react-native";
 import {
     Modal,
     Portal,
@@ -10,13 +17,20 @@ import {
     TextInput,
     PaperProvider,
     Checkbox,
-    IconButton
+    IconButton,
+    Card
 } from "react-native-paper";
 
 import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
 import findExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
-import findExtinguisherBySublocalization from "@/api/FindExtinguisherBySubLocalization";
-
+import findExtinguisherBySublocalization from "@/api/FindExtinguisherBySublocalization";
+import findExtinguisherById from "@/api/findExtinguisherById";
+interface Localization {
+    id: number;
+    area: string;
+    subwayStation: string;
+    detailedLocation: string;
+}
 interface Extinguisher {
     id: string;
     extinguisherType: string;
@@ -27,7 +41,7 @@ interface Extinguisher {
     teamCode: number;
     nextInspection: string;
     extinguisherStatus: string;
-    localization: string;
+    localization: Localization;
 }
 
 export default function FindExtinguisherByFilter() {
@@ -39,29 +53,41 @@ export default function FindExtinguisherByFilter() {
     const [checked5, setChecked5] = useState(false);
     const [checked6, setChecked6] = useState(false);
 
-    const [text, setText] = useState("");
+    const [id, setid] = useState("");
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
+    const [extinguishers, setExtinguishers] = useState<Extinguisher[]>([]);
 
     async function handleCheckboxStatus(status: string) {
+        extinguishers.length = 0;
         const response = (await findExtinguisherByStatus(
             status
         )) as Extinguisher[];
+        setExtinguishers(response);
         console.log(response);
         hideModal();
     }
     async function handleCheckboxLocalization(localization: Number) {
+        extinguishers.length = 0;
         const response = (await findExtinguisherByLocalization(
             localization
         )) as Extinguisher[];
+        setExtinguishers(response);
         console.log(response);
+        hideModal();
     }
-    async function handleTextInputSublocation(localization: String) {
-        const response = (await findExtinguisherBySublocalization(
-            localization
-        )) as Extinguisher[];
-        console.log(response);
+    async function handleTextInputId(ID: String) {
+        extinguishers.length = 0;
+        const response = (await findExtinguisherById(ID)) as Extinguisher[];
+        if (Array.isArray(response)) {
+            setExtinguishers(response);
+        } else if (response && typeof response === "object") {
+            setExtinguishers([response]);
+        } else {
+            console.error("A resposta não é um formato esperado:", response);
+            setExtinguishers([]);
+        }
     }
 
     return (
@@ -77,22 +103,22 @@ export default function FindExtinguisherByFilter() {
             <View>
                 <TextInput
                     mode="outlined"
-                    label="Sublocalização"
+                    label="Id do Extintor"
                     style={styles.textInput}
-                    value={text}
-                    onChangeText={(text) => setText(text)}
+                    value={id}
+                    onChangeText={(ID) => setid(ID)}
                 />
                 <IconButton
                     icon="filter-variant"
                     size={50}
-                    onPress={() => handleTextInputSublocation(text)}
+                    onPress={showModal}
                     style={{ position: "absolute", right: 0, marginTop: 10 }}
                 />
             </View>
             <View style={styles.buttonContainer}>
                 <Button
                     style={{ width: 300, marginLeft: 15, borderRadius: 12 }}
-                    onPress={showModal}
+                    onPress={() => handleTextInputId(id)}
                 >
                     <Text style={{ color: "white" }}> Buscar Extintores </Text>
                 </Button>
@@ -291,6 +317,60 @@ export default function FindExtinguisherByFilter() {
                             </View>
                         </Modal>
                     </Portal>
+                    <ScrollView style={{ width: "100%" }}>
+                        {extinguishers.map((extinguisher) => (
+                            <Card
+                                key={extinguisher.id}
+                                style={{
+                                    margin: 5,
+                                    backgroundColor: "gray",
+                                    justifyContent: "center"
+                                }}
+                            >
+                                <Card.Content>
+                                    <Text>ID: {extinguisher.id}</Text>
+                                    <Text>
+                                        Tipo: {extinguisher.extinguisherType}
+                                    </Text>
+                                    <Text>
+                                        Capacidade: {extinguisher.capacity}
+                                    </Text>
+                                    <Text>
+                                        Manufatura:{" "}
+                                        {extinguisher.manufacturerCode}
+                                    </Text>
+                                    <Text>
+                                        Expiração: {extinguisher.expirationDate}
+                                    </Text>
+                                    <Text>
+                                        Última Recarga:{" "}
+                                        {extinguisher.lastRechargeDate}
+                                    </Text>
+                                    <Text>
+                                        Status:{" "}
+                                        {extinguisher.extinguisherStatus}
+                                    </Text>
+                                    <Text>
+                                        Área: {extinguisher.localization.area}
+                                    </Text>
+                                    <Text>
+                                        Estação:{" "}
+                                        {
+                                            extinguisher.localization
+                                                .subwayStation
+                                        }
+                                    </Text>
+                                    <Text>
+                                        Localização Detalhada:{" "}
+                                        {
+                                            extinguisher.localization
+                                                .detailedLocation
+                                        }
+                                    </Text>
+                                </Card.Content>
+                            </Card>
+                        ))}
+                    </ScrollView>
                 </View>
             </PaperProvider>
         </>
