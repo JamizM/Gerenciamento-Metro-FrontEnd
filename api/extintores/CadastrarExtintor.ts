@@ -2,10 +2,9 @@ import axios from "axios";
 
 export default async function cadastrarExtintor(objetoExtintor: Object) {
     const base64Credentials = btoa("Admin:Admin");
-    const ipLocal = process.env.IP_LOCAL;
     try {
         const response = await axios.post(
-            `http://${ipLocal}:8080/api/Extinguishers`,
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers`, //url
             objetoExtintor,
             {
                 headers: {

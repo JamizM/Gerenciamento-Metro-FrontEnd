@@ -1,14 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { Link } from "expo-router";
 import React from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, ScrollView } from "react-native";
 import { IconButton } from "react-native-paper";
 
 export default function SecondPage() {
     const navigation = useNavigation();
 
     return (
-        <View>
+        <ScrollView>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <IconButton
@@ -32,6 +32,34 @@ export default function SecondPage() {
                         </Link>
                     </View>
                     <View style={styles.buttonContainer}>
+                        <Link href="/ListExtinguishersPage" asChild>
+                            <Pressable>
+                                <Text style={styles.link}>Listar</Text>
+                            </Pressable>
+                        </Link>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Link href="/ExtinguisherByIdPage" asChild>
+                            <Pressable>
+                                <Text style={styles.link}>Localizar</Text>
+                            </Pressable>
+                        </Link>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Link href="/UpdateExtinguisherPage" asChild>
+                            <Pressable>
+                                <Text style={styles.link}>Alterar</Text>
+                            </Pressable>
+                        </Link>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Link href="/DeleteExtinguisherPage" asChild>
+                            <Pressable>
+                                <Text style={styles.link}>Deletar</Text>
+                            </Pressable>
+                        </Link>
+                    </View>
+                    <View style={styles.buttonContainer}>
                         <Link href="/GenerateQRCodePage" asChild>
                             <Pressable>
                                 <Text>
@@ -49,7 +77,7 @@ export default function SecondPage() {
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -80,7 +108,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     link: {
-        fontSize: 35,
+        fontSize: 25,
         color: "#fff",
         textAlign: "center",
         textAlignVertical: "center",
