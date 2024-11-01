@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import {
     View,
@@ -88,6 +88,7 @@ export default function LocalizacaoExtintores() {
                 "As informações foram salvas com sucesso."
             );
             console.log("Informações enviadas:", extintores);
+            router.navigate("/ExtinguisherPage");
         }
     };
 
@@ -111,98 +112,121 @@ export default function LocalizacaoExtintores() {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.header}>
                 <IconButton
                     icon="arrow-left"
                     size={24}
+                    // style={{ marginRight: 15 }}
                     onPress={() => navigation.goBack()}
                 />
                 <Text style={styles.title}>Localização dos Extintores</Text>
             </View>
             <View style={styles.line} />
 
-            {Object.entries(extintores).map(([linha, plataformas], index) => (
-                <View key={index} style={styles.linhaBox}>
-                    <TouchableOpacity onPress={() => toggleExpand(linha)}>
-                        <View
-                            style={[
-                                styles.linhaHeader,
-                                { backgroundColor: getLinhaColor(linha) }
-                            ]}
-                        >
-                            <Text style={styles.linhaTitulo}>{linha}</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    {expandedLines[linha] && (
-                        <View style={styles.plataformaContainer}>
-                            {plataformas.map((extintor, idx) => (
-                                <View key={idx} style={styles.plataformaCard}>
-                                    <Text style={styles.label}>Estação:</Text>
-                                    <TextInput
-                                        style={styles.input}
-                                        value={extintor.estacao}
-                                        onChangeText={(value) =>
-                                            handleChange(
-                                                linha,
-                                                idx,
-                                                "estacao",
-                                                value
-                                            )
+            <ScrollView>
+                {Object.entries(extintores).map(
+                    ([linha, plataformas], index) => (
+                        <View key={index} style={styles.linhaBox}>
+                            <TouchableOpacity
+                                onPress={() => toggleExpand(linha)}
+                            >
+                                <View
+                                    style={[
+                                        styles.linhaHeader,
+                                        {
+                                            backgroundColor:
+                                                getLinhaColor(linha)
                                         }
-                                    />
-                                    {errors[`${linha}-${idx}`] && (
-                                        <Text style={styles.error}>
-                                            {errors[`${linha}-${idx}`]}
-                                        </Text>
-                                    )}
-
-                                    <Text style={styles.label}>
-                                        Plataforma:
+                                    ]}
+                                >
+                                    <Text style={styles.linhaTitulo}>
+                                        {linha}
                                     </Text>
-                                    <TextInput
-                                        style={styles.input}
-                                        value={extintor.plataforma}
-                                        onChangeText={(value) =>
-                                            handleChange(
-                                                linha,
-                                                idx,
-                                                "plataforma",
-                                                value
-                                            )
-                                        }
-                                    />
-
-                                    <Text style={styles.label}>
-                                        Localização Detalhada:
-                                    </Text>
-                                    <TextInput
-                                        style={styles.input}
-                                        value={extintor.descricao}
-                                        onChangeText={(value) =>
-                                            handleChange(
-                                                linha,
-                                                idx,
-                                                "descricao",
-                                                value
-                                            )
-                                        }
-                                    />
                                 </View>
-                            ))}
+                            </TouchableOpacity>
+
+                            {expandedLines[linha] && (
+                                <View style={styles.plataformaContainer}>
+                                    {plataformas.map((extintor, idx) => (
+                                        <View
+                                            key={idx}
+                                            style={styles.plataformaCard}
+                                        >
+                                            <Text style={styles.label}>
+                                                Estação:
+                                            </Text>
+                                            <TextInput
+                                                style={styles.input}
+                                                value={extintor.estacao}
+                                                onChangeText={(value) =>
+                                                    handleChange(
+                                                        linha,
+                                                        idx,
+                                                        "estacao",
+                                                        value
+                                                    )
+                                                }
+                                            />
+                                            {errors[`${linha}-${idx}`] && (
+                                                <Text style={styles.error}>
+                                                    {errors[`${linha}-${idx}`]}
+                                                </Text>
+                                            )}
+
+                                            <Text style={styles.label}>
+                                                Plataforma:
+                                            </Text>
+                                            <TextInput
+                                                style={styles.input}
+                                                value={extintor.plataforma}
+                                                onChangeText={(value) =>
+                                                    handleChange(
+                                                        linha,
+                                                        idx,
+                                                        "plataforma",
+                                                        value
+                                                    )
+                                                }
+                                            />
+
+                                            <Text style={styles.label}>
+                                                Localização Detalhada:
+                                            </Text>
+                                            <TextInput
+                                                style={styles.input}
+                                                value={extintor.descricao}
+                                                onChangeText={(value) =>
+                                                    handleChange(
+                                                        linha,
+                                                        idx,
+                                                        "descricao",
+                                                        value
+                                                    )
+                                                }
+                                            />
+                                        </View>
+                                    ))}
+                                </View>
+                            )}
                         </View>
-                    )}
+                    )
+                )}
+                <View style={styles.buttonContainer}>
+                    <Link href="/ExtinguisherPage" asChild>
+                        <Pressable onPress={handleSendInfo}>
+                            <Text style={styles.link}>Enviar</Text>
+                        </Pressable>
+                    </Link>
                 </View>
-            ))}
-            <View style={styles.buttonContainer}>
-                <Link href="/ExtinguisherPage" asChild>
+
+                {/* <View style={styles.buttonContainer}>
                     <Pressable onPress={handleSendInfo}>
                         <Text style={styles.link}>Enviar</Text>
                     </Pressable>
-                </Link>
-            </View>
-        </ScrollView>
+                </View> */}
+            </ScrollView>
+        </View>
     );
 }
 
@@ -216,19 +240,22 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         padding: 10,
-        backgroundColor: "transparent"
+        backgroundColor: "transparent",
+        justifyContent: "space-between"
     },
     title: {
+        color: "black",
         fontSize: 20,
-        fontWeight: "bold",
-        color: "#003DA5",
-        marginLeft: 10
+        position: "relative",
+        left: "50%",
+        flex: 1
     },
     line: {
-        height: 2,
-        backgroundColor: "#ccc",
-        marginBottom: 16,
-        width: "100%"
+        height: 1,
+        backgroundColor: "black",
+        marginBottom: 10,
+        width: "90%",
+        alignSelf: "center"
     },
     linhaBox: {
         marginBottom: 24,
