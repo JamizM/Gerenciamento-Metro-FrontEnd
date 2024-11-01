@@ -18,7 +18,7 @@ export default async function listarExtintores(): Promise<Extinguisher[]> {
 
     try {
         const response = await axios.get<Extinguisher[]>(
-            `http://192.168.0.41:8080/api/Extinguishers`, //url
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers`, //url
             {
                 headers: {
                     Authorization: `Basic ${base64Credentials}`,

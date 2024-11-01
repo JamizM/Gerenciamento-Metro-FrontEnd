@@ -4,7 +4,7 @@ export default async function cadastrarExtintor(objetoExtintor: Object) {
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.post(
-            `http://192.168.0.41:8080/api/Extinguishers`, //url
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers`, //url
             objetoExtintor,
             {
                 headers: {

@@ -19,7 +19,7 @@ export default async function LocalizarExtintorPorId(
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.get<Extinguisher>(
-            `http://192.168.0.41:8080/api/Extinguishers/${extinguisherId}`,
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers/${extinguisherId}`,
             {
                 headers: {
                     Authorization: `Basic ${base64Credentials}`,
