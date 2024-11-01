@@ -26,8 +26,7 @@ interface Extinguisher {
 // então, após puxar os dados, tratá-los
 export default async function PuxarExtintoresPorEstacao(localizacao: int) {
     const base64Credentials = btoa("Admin:Admin");
-    const ipLocal = process.env.IP_LOCAL;
-    const url = `http://${ipLocal}:8080/api/Extinguishers?localization=${localizacao}`;
+    const url = `http://xxx.xxx.x.xx:8080/api/Extinguishers?localization=${localizacao}`; //url
     try {
         const response = await axios.get(url, {
             headers: {

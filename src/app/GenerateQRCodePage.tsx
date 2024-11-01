@@ -50,7 +50,7 @@ const QRCodeGenerator = () => {
     };
 
     const handleOpenURL = () => {
-        const url = `http://10.2.128.58/api/Extinguishers/${extinguisherId}/qrcode`;
+        const url = `http://xxx.xxx.x.xx:8080/api/Extinguishers/${extinguisherId}/qrcode`; //url
         Linking.openURL(url).catch((err) =>
             console.error("Erro ao abrir URL:", err)
         );
