@@ -1,9 +1,9 @@
 import { router } from "expo-router";
 import * as React from "react";
 import { useState } from "react";
-import { Text, StyleSheet, View, Button } from "react-native";
+import { Text, StyleSheet, View, ScrollView } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { TextInput, IconButton } from "react-native-paper";
+import { Button, TextInput, IconButton } from "react-native-paper";
 
 import cadastrarExtintor from "@/api/extintores/CadastrarExtintor";
 
@@ -64,101 +64,110 @@ export default function ExtinguisherPage() {
             </View>
             <View style={styles.line} />
 
-            <TextInput
-                mode="outlined"
-                label="Codigo de Patrimonio"
-                placeholder="EX: 0EX143-4442"
-                style={styles.localInput}
-                value={id}
-                onChangeText={(patrimonio) => setId(patrimonio)}
-            />
-            <DropDownPicker
-                open={openTypeDropdown}
-                value={extinguisherType}
-                items={typeOptions}
-                setOpen={(value) => {
-                    setOpenTypeDropdown(value);
-                    setOpenStatusDropdown(false); // Fecha o outro dropdown
-                }}
-                setValue={setExtinguisherType}
-                setItems={setTypeOptions}
-                style={styles.dropdown}
-                dropDownContainerStyle={styles.dropdownContainer}
-                placeholder="Selecione o tipo"
-            />
-            <TextInput
-                mode="outlined"
-                label="Capacidade"
-                placeholder="EX: 10"
-                keyboardType="numeric"
-                style={styles.localInput}
-                value={capacity}
-                onChangeText={(tipo) => setCapacity(tipo)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Código de manufatura"
-                placeholder="EX: GIEFL"
-                style={styles.localInput}
-                value={manufacturerCode}
-                onChangeText={(capacidade) => setManufacturerCode(capacidade)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Datade expiração"
-                placeholder="EX: 2027-12-01"
-                keyboardType="numeric"
-                style={styles.localInput}
-                value={expirationDate}
-                onChangeText={(nsei) => setExpirationDate(nsei)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Data do último Carregamento"
-                placeholder="EX: 2023-01-01"
-                keyboardType="numeric"
-                style={styles.localInput}
-                value={lastRechargeDate}
-                onChangeText={(fabricante) => setLastRechargeDate(fabricante)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Código do time"
-                style={styles.localInput}
-                value={teamCode}
-                keyboardType="numeric"
-                onChangeText={(area) => setTeamCode(area)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Próxima inspeção"
-                placeholder="EX: 2026-01-01"
-                keyboardType="numeric"
-                style={styles.localInput}
-                value={nextInspection}
-                onChangeText={(gerencia) => setNextInspection(gerencia)}
-            />
-            <DropDownPicker
-                open={openStatusDropdown}
-                value={extinguisherStatus}
-                items={statusOptions}
-                setOpen={(value) => {
-                    setOpenStatusDropdown(value);
-                    setOpenTypeDropdown(false); // Fecha o outro dropdown
-                }}
-                setValue={setExtinguisherStatus}
-                setItems={setStatusOptions}
-                style={styles.dropdown}
-                dropDownContainerStyle={styles.dropdownContainer}
-                placeholder="Selecione o status"
-            />
-
-            <View style={styles.buttonContainer}>
-                <Button
-                    title="Cadastrar Extintor"
-                    onPress={handlePress} // Chama handlePress que por sua vez chama cadastrarExtintor
+            <ScrollView nestedScrollEnabled>
+                <TextInput
+                    mode="outlined"
+                    label="Codigo de Patrimonio"
+                    placeholder="EX: 0EX143-4442"
+                    style={styles.localInput}
+                    value={id}
+                    onChangeText={(patrimonio) => setId(patrimonio)}
                 />
-            </View>
+                <DropDownPicker
+                    open={openTypeDropdown}
+                    value={extinguisherType}
+                    items={typeOptions}
+                    setOpen={(value) => {
+                        setOpenTypeDropdown(value);
+                        setOpenStatusDropdown(false); // Fecha o outro dropdown
+                    }}
+                    setValue={setExtinguisherType}
+                    setItems={setTypeOptions}
+                    style={styles.dropdown}
+                    listMode="SCROLLVIEW"
+                    dropDownContainerStyle={styles.dropdownContainer}
+                    placeholder="Selecione o tipo"
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Capacidade"
+                    placeholder="EX: 10"
+                    keyboardType="numeric"
+                    style={styles.localInput}
+                    value={capacity}
+                    onChangeText={(tipo) => setCapacity(tipo)}
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Código de manufatura"
+                    placeholder="EX: GIEFL"
+                    style={styles.localInput}
+                    value={manufacturerCode}
+                    onChangeText={(capacidade) =>
+                        setManufacturerCode(capacidade)
+                    }
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Datade expiração"
+                    placeholder="EX: 2027-12-01"
+                    keyboardType="numeric"
+                    style={styles.localInput}
+                    value={expirationDate}
+                    onChangeText={(nsei) => setExpirationDate(nsei)}
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Data do último Carregamento"
+                    placeholder="EX: 2023-01-01"
+                    keyboardType="numeric"
+                    style={styles.localInput}
+                    value={lastRechargeDate}
+                    onChangeText={(fabricante) =>
+                        setLastRechargeDate(fabricante)
+                    }
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Código do time"
+                    style={styles.localInput}
+                    value={teamCode}
+                    keyboardType="numeric"
+                    onChangeText={(area) => setTeamCode(area)}
+                />
+                <TextInput
+                    mode="outlined"
+                    label="Próxima inspeção"
+                    placeholder="EX: 2026-01-01"
+                    keyboardType="numeric"
+                    style={styles.localInput}
+                    value={nextInspection}
+                    onChangeText={(gerencia) => setNextInspection(gerencia)}
+                />
+                <DropDownPicker
+                    open={openStatusDropdown}
+                    value={extinguisherStatus}
+                    items={statusOptions}
+                    setOpen={(value) => {
+                        setOpenStatusDropdown(value);
+                        setOpenTypeDropdown(false); // Fecha o outro dropdown
+                    }}
+                    setValue={setExtinguisherStatus}
+                    setItems={setStatusOptions}
+                    style={styles.dropdown}
+                    listMode="SCROLLVIEW"
+                    dropDownContainerStyle={styles.dropdownContainer}
+                    placeholder="Selecione o status"
+                />
+            </ScrollView>
+
+            <Button
+                mode="contained"
+                style={styles.buttonContainer}
+                onPress={handlePress} // Chama handlePress que por sua vez chama cadastrarExtintor
+            >
+                Cadastrar Extintor
+            </Button>
         </>
     );
 }
@@ -193,7 +202,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         alignSelf: "center",
         width: "80%",
-        marginTop: 20
+        marginBottom: 15
     },
     dropdown: {
         width: "80%",
@@ -202,7 +211,7 @@ const styles = StyleSheet.create({
         // borderColor: "#6200ee", // mesma cor do TextInput outlined
         borderWidth: 1,
         borderRadius: 4,
-        height: 56 // altura similar ao TextInput
+        height: 50 // altura similar ao TextInput
     },
     dropdownContainer: {
         width: "80%",

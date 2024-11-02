@@ -8,76 +8,76 @@ export default function SecondPage() {
     const navigation = useNavigation();
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <IconButton
-                        icon="arrow-left"
-                        size={30}
-                        onPress={() => navigation.goBack()}
-                    />
-                    <Text style={styles.title}>
-                        Administração dos Extintores
-                    </Text>
-                </View>
-
-                <View style={styles.line} />
-
-                <View style={styles.buttonGroup}>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/LocationPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Cadastrar</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/ListExtinguishersPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Listar</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/ExtinguisherByIdPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Localizar</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/UpdateExtinguisherPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Alterar</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/DeleteExtinguisherPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Deletar</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/GenerateQRCodePage" asChild>
-                            <Pressable>
-                                <Text>
-                                    <Text style={styles.link}>QR Code</Text>
-                                </Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Link href="/CameraPage" asChild>
-                            <Pressable>
-                                <Text style={styles.link}>Escanear QR</Text>
-                            </Pressable>
-                        </Link>
-                    </View>
-                </View>
+        <>
+            <View style={styles.header}>
+                <IconButton
+                    icon="arrow-left"
+                    size={30}
+                    onPress={() => navigation.goBack()}
+                />
+                <Text style={styles.title}>Administração dos Extintores</Text>
             </View>
-        </ScrollView>
+
+            <View style={styles.line} />
+
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.buttonGroup}>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/LocationPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Cadastrar</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/ListExtinguishersPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Listar</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/ExtinguisherByIdPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Localizar</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/UpdateExtinguisherPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Alterar</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/DeleteExtinguisherPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Deletar</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/GenerateQRCodePage" asChild>
+                                <Pressable>
+                                    <Text>
+                                        <Text style={styles.link}>QR Code</Text>
+                                    </Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/CameraPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Escanear QR</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
+        </>
     );
 }
 
