@@ -5,7 +5,7 @@ import { Text, StyleSheet, View, ScrollView } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Button, TextInput, IconButton } from "react-native-paper";
 
-import cadastrarExtintor from "@/api/extintores/CadastrarExtintor";
+import registerExtinguisher from "@/api/RegisterExtinguisher";
 
 export default function ExtinguisherPage() {
     const [openTypeDropdown, setOpenTypeDropdown] = useState(false);
@@ -46,11 +46,9 @@ export default function ExtinguisherPage() {
         extinguisherStatus
     };
     const handlePress = async () => {
-        try {
-            await cadastrarExtintor(objeto); // Chama a função já existente cadastrarExtintor
-        } catch (error) {
-            console.log("Erro ao cadastrar o extintor:", error);
-        }
+        await registerExtinguisher(objeto)
+            .then((response) => alert("Enviado com sucesso!"))
+            .catch((error) => alert("Erro"));
     };
 
     return (

@@ -34,7 +34,7 @@ export default async function Login(emailUser: string, passwordUser: string) {
             return false;
         }
     } catch (error) {
-        console.error("Erro ao buscar Usuário:", error);
+        console.log(error);
         return false;
     }
 }

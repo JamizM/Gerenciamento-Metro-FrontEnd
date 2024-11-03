@@ -4,15 +4,15 @@ import { ScrollView, View, Text, Button, StyleSheet } from "react-native";
 import { IconButton } from "react-native-paper";
 import { VictoryBar, VictoryChart, VictoryTheme } from "victory-native";
 
-import PuxarExtintoresPorEstacao from "@/api/extintores/PuxarExtintoresPorEstacao";
+import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
 
 export default function Report() {
     const [selectedReport, setSelectedReport] = useState(null);
     const navigation = useNavigation();
 
     const quantidadeExtintores = [
-        { month: "Jabaquara", value: PuxarExtintoresPorEstacao(1) },
-        { month: "Tucuruvi", value: PuxarExtintoresPorEstacao(2) }
+        { month: "Jabaquara", value: findExtinguisherByLocalization(1) },
+        { month: "Tucuruvi", value: findExtinguisherByLocalization(2) }
     ];
 
     const StatusExtintor = [
