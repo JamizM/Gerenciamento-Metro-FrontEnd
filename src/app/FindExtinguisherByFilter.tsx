@@ -23,8 +23,7 @@ import {
 
 import findExtinguisherByLocalization from "@/api/FindExtinguisherByLocalization";
 import findExtinguisherByStatus from "@/api/FindExtinguisherByStatus";
-import findExtinguisherBySublocalization from "@/api/FindExtinguisherBySublocalization";
-import findExtinguisherById from "@/api/findExtinguisherById";
+import findExtinguisherByType from "@/api/FindExtinguisherByType";
 interface Localization {
     id: number;
     area: string;
@@ -53,7 +52,7 @@ export default function FindExtinguisherByFilter() {
     const [checked5, setChecked5] = useState(false);
     const [checked6, setChecked6] = useState(false);
 
-    const [id, setid] = useState("");
+    const [type, setType] = useState("");
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
@@ -79,7 +78,7 @@ export default function FindExtinguisherByFilter() {
     }
     async function handleTextInputId(ID: String) {
         extinguishers.length = 0;
-        const response = (await findExtinguisherById(ID)) as Extinguisher[];
+        const response = (await findExtinguisherByType(type)) as Extinguisher[];
         if (Array.isArray(response)) {
             setExtinguishers(response);
         } else if (response && typeof response === "object") {
@@ -105,8 +104,8 @@ export default function FindExtinguisherByFilter() {
                     mode="outlined"
                     label="Id do Extintor"
                     style={styles.textInput}
-                    value={id}
-                    onChangeText={(ID) => setid(ID)}
+                    value={type}
+                    onChangeText={(type) => setType(type)}
                 />
                 <IconButton
                     icon="filter-variant"
@@ -118,7 +117,7 @@ export default function FindExtinguisherByFilter() {
             <View style={styles.buttonContainer}>
                 <Button
                     style={{ width: 300, marginLeft: 15, borderRadius: 12 }}
-                    onPress={() => handleTextInputId(id)}
+                    onPress={() => handleTextInputId(type)}
                 >
                     <Text style={{ color: "white" }}> Buscar Extintores </Text>
                 </Button>
