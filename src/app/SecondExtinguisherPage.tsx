@@ -59,6 +59,20 @@ export default function SecondPage() {
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
+                            <Link href="/ExtinguisherAlertPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Alerta</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/MaintenancePreventivePage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Manutenção</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
                             <Link href="/GenerateQRCodePage" asChild>
                                 <Pressable>
                                     <Text>
