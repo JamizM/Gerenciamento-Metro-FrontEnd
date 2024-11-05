@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
-        backgroundColor: "#1E90FF",
+        backgroundColor: "#001489",
         borderRadius: 20
     },
     link: {

@@ -38,6 +38,9 @@ const ExtinguisherAlertPage: React.FC = () => {
                         {item.includes("expirado") && (
                             <View style={styles.expiredIndicator} />
                         )}
+                        {item.includes("vencer") && (
+                            <View style={styles.expiredIndicatorOrange} />
+                        )}
                     </View>
                 )}
             />
@@ -72,6 +75,12 @@ const styles = StyleSheet.create({
         width: 10,
         height: 10,
         backgroundColor: "red",
+        borderRadius: 5
+    },
+    expiredIndicatorOrange: {
+        width: 10,
+        height: 10,
+        backgroundColor: "#ff8c00",
         borderRadius: 5
     }
 });

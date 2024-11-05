@@ -4,7 +4,7 @@ export default async function registerExtinguisher(objetoExtintor: Object) {
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.post(
-            "http://xxx.xxx.x.xx:8080/api/Extinguishers",
+            "http://xxx.xx.x.xx:8080/api/Extinguishers",
             objetoExtintor,
             {
                 headers: {

@@ -1,6 +1,6 @@
 import { useNavigation } from "expo-router";
 import React, { useState } from "react";
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { View, TextInput, Text, StyleSheet, Alert } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 
 import DeletarExtintorPeloId from "@/api/extintores/DeletarExtintor";
@@ -10,7 +10,22 @@ const DeleteExtinguisherPage = () => {
     const [message, setMessage] = useState("");
     const navigation = useNavigation();
 
-    const handleDelete = async () => {
+    const handleDelete = () => {
+        Alert.alert(
+            "Confirmar Deleção",
+            "Tem certeza que deseja deletar o extintor?",
+            [
+                { text: "Cancelar", style: "cancel" },
+                {
+                    text: "Confirmar",
+                    onPress: handleConfirmDelete,
+                    style: "destructive"
+                }
+            ]
+        );
+    };
+
+    const handleConfirmDelete = async () => {
         try {
             await DeletarExtintorPeloId(extinguisherId);
             setMessage("Extintor deletado com sucesso!");

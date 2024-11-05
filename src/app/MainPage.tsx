@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: "#ddd",
-        backgroundColor: "#003DA5"
+        backgroundColor: "#001489"
     },
     buttonGroup: {
         flexDirection: "column",
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
-        backgroundColor: "#1E90FF",
+        backgroundColor: "#001489",
         borderRadius: 20,
         marginVertical: 10
     },

@@ -38,7 +38,7 @@ export default function SecondPage() {
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/ExtinguisherByIdPage" asChild>
+                            <Link href="/LocalizationExtinguisherPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Localizar</Text>
                                 </Pressable>
@@ -81,13 +81,6 @@ export default function SecondPage() {
                                 </Pressable>
                             </Link>
                         </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/CameraPage" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>Escanear QR</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -117,7 +110,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
-        backgroundColor: "#1E90FF",
+        backgroundColor: "#001489",
         borderRadius: 20,
         marginVertical: 10
     },
