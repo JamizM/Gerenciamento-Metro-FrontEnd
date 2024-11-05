@@ -8,7 +8,7 @@ export default async function ManutencaoPreventiva(
 
     try {
         const response = await axios.post(
-            `http://10.2.128.159:8080/api/Extinguishers/Schedule-Regular-Inspections?extinguisherId=${extinguisherId}&months=${months}`, //url
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers/Schedule-Regular-Inspections?extinguisherId=${extinguisherId}&months=${months}`, //url
             {},
             {
                 headers: {

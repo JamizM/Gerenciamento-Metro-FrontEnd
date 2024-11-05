@@ -5,7 +5,7 @@ export default async function AlertaExtintores() {
 
     try {
         const response = await axios.get(
-            `http://10.2.128.159:8080/api/Extinguishers/Search-Extinguisher-By-Expiration-Date`, //url
+            `http://xxx.xxx.x.xx:8080/api/Extinguishers/Search-Extinguisher-By-Expiration-Date`, //url
             {
                 headers: {
                     Authorization: `Basic ${base64Credentials}`,
