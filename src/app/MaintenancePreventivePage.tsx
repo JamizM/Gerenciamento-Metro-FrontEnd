@@ -6,16 +6,16 @@ import { IconButton } from "react-native-paper";
 import ManutencaoPreventiva from "@/api/extintores/ManutencaoPreventiva";
 
 const MaintenancePreventivePage: React.FC = () => {
-    const [extintorId, setExtintorId] = useState("");
-    const [meses, setMeses] = useState("");
+    const [extinguisherId, setExtinguisherId] = useState("");
+    const [months, setMonths] = useState("");
     const [response, setResponse] = useState<string | null>(null);
     const navigation = useNavigation();
 
     const handleButtonClick = async () => {
         try {
             const result = await ManutencaoPreventiva(
-                extintorId,
-                parseInt(meses)
+                extinguisherId,
+                parseInt(months)
             );
             setResponse(result as string);
             Alert.alert("Resposta", JSON.stringify(result));
@@ -42,8 +42,8 @@ const MaintenancePreventivePage: React.FC = () => {
                 <Text>ID do Extintor:</Text>
                 <TextInput
                     style={styles.input}
-                    value={extintorId}
-                    onChangeText={setExtintorId}
+                    value={extinguisherId}
+                    onChangeText={setExtinguisherId}
                     placeholder="Digite o ID"
                 />
             </View>
@@ -51,8 +51,8 @@ const MaintenancePreventivePage: React.FC = () => {
                 <Text>Meses:</Text>
                 <TextInput
                     style={styles.input}
-                    value={meses}
-                    onChangeText={setMeses}
+                    value={months}
+                    onChangeText={setMonths}
                     keyboardType="numeric"
                     placeholder="Digite em meses"
                 />

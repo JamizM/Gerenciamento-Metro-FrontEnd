@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: "bold",
-        textDecorationLine: "underline"
+        textDecorationLine: "underline",
+        left: 40
     },
     item: {
         padding: 16,

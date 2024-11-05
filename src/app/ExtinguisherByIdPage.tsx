@@ -27,7 +27,7 @@ const ExtinguisherByIdPage = () => {
     const findExtinguisherById = async () => {
         try {
             const response = await LocalizarExtintorPorId(extinguisherId);
-            setExtinguisher(response);
+            setExtinguisher(response as unknown as Extinguisher);
             setError("");
             console.log("Detalhes do extintor:", response);
         } catch (error: unknown) {

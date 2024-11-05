@@ -41,13 +41,15 @@ const EditExtinguisherPage = () => {
         try {
             const updatedData = {
                 ...extinguisherData,
-                localization: extinguisherData.localization || { id: 1 }
+                id: parseInt(extinguisherId, 10),
+                localization: extinguisherData.localization || { id: 1 },
+                capacity: extinguisherData.capacity?.toString()
             };
 
             const updatedExtinguisher = await AlterarExtintorPeloID(
                 extinguisherId,
                 updatedData
-            ); // Ajustar a função AlterarExtintorPeloID para aceitar a estrutura correta
+            );
             setMessage("Extintor atualizado com sucesso!");
             console.log("Dados atualizados do extintor:", updatedExtinguisher);
         } catch (error) {
@@ -68,7 +70,7 @@ const EditExtinguisherPage = () => {
             </View>
             <TextInput
                 style={styles.input}
-                placeholder="ID do extintor"
+                placeholder="ID do extintor (Obrigatório)"
                 value={extinguisherId}
                 onChangeText={setExtinguisherId}
             />
@@ -151,7 +153,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         textAlign: "center",
-        right: -40
+        right: -40,
+        textDecorationLine: "underline"
     },
     input: {
         height: 40,

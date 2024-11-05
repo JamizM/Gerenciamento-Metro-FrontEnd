@@ -1,7 +1,7 @@
 import axios from "axios";
 
 interface Extinguisher {
-    id: number;
+    id: string;
     extinguisherType: string;
     capacity: string;
     lastInspectionDate: string;
