@@ -15,7 +15,7 @@ export default function SecondPage() {
                     size={30}
                     onPress={() => navigation.goBack()}
                 />
-                <Text style={styles.title}>Administração dos Extintores</Text>
+                <Text style={styles.title}>Histórico de Manutenção</Text>
             </View>
 
             <View style={styles.line} />
@@ -24,67 +24,54 @@ export default function SecondPage() {
                 <View style={styles.container}>
                     <View style={styles.buttonGroup}>
                         <View style={styles.buttonContainer}>
-                            <Link href="/LocationPage" asChild>
+                            <Link href="/SubmitHistoricManutentionPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Cadastrar</Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/ListExtinguishersPage" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>Listar</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/LocalizationExtinguisherPage" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>Localizar</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/UpdateExtinguisherPage" asChild>
+                            <Link href="/UpdateHistoricManutentionPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Alterar</Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/DeleteExtinguisherPage" asChild>
+                            <Link href="/DeleteHistoricManutentionPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Deletar</Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/ExtinguisherAlertPage" asChild>
+                            <Link href="/ListHistoricManutentionsPage" asChild>
                                 <Pressable>
-                                    <Text style={styles.link}>Alerta</Text>
+                                    <Text style={styles.link}>Listar</Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/MaintenancePreventivePage" asChild>
+                            <Link
+                                href="/ListHistoricManutentionByIdPage"
+                                asChild
+                            >
                                 <Pressable>
-                                    <Text style={styles.link}>Manutenção</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/GenerateQRCodePage" asChild>
-                                <Pressable>
-                                    <Text>
-                                        <Text style={styles.link}>QR Code</Text>
+                                    <Text style={styles.link}>
+                                        Localizar Histórico
                                     </Text>
                                 </Pressable>
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/FindExtinguisherByFilter" asChild>
+                            <Link
+                                href="/FindExtinguisherByHistoricManutentionPage"
+                                asChild
+                            >
                                 <Pressable>
-                                    <Text style={styles.link}>Filtro</Text>
+                                    <Text style={styles.link}>
+                                        Localizar Extintor
+                                    </Text>
                                 </Pressable>
                             </Link>
                         </View>
@@ -139,7 +126,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         flex: 1,
-        textAlign: "center"
+        textAlign: "center",
+        right: 25
     },
     line: {
         height: 1,

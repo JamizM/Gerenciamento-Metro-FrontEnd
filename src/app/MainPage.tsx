@@ -35,32 +35,25 @@ export default function MainPage() {
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
+                            <Link href="/SecondHistoricManutentionPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>
+                                        Historico de Manutenção
+                                    </Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Link href="/ReportPage" asChild>
+                                <Pressable>
+                                    <Text style={styles.link}>Localização</Text>
+                                </Pressable>
+                            </Link>
+                        </View>
+                        <View style={styles.buttonContainer}>
                             <Link href="/ReportPage" asChild>
                                 <Pressable>
                                     <Text style={styles.link}>Relatórios</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/#" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>Exemplo</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/#" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>Exemplo</Text>
-                                </Pressable>
-                            </Link>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Link href="/FindExtinguisherByFilter" asChild>
-                                <Pressable>
-                                    <Text style={styles.link}>
-                                        Buscar Extintores
-                                    </Text>
                                 </Pressable>
                             </Link>
                         </View>
@@ -76,7 +69,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         backgroundColor: "#fff"
     },
-
     header: {
         flexDirection: "row",
         justifyContent: "center",
@@ -94,8 +86,6 @@ const styles = StyleSheet.create({
         paddingVertical: 6
     },
     buttonContainer: {
-        flexDirection: "row",
-        flexWrap: "wrap",
         padding: 10,
         width: 250,
         height: 100,
@@ -107,12 +97,12 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     link: {
-        fontSize: 25,
+        fontSize: 20,
         color: "#fff",
         textAlign: "center",
         textAlignVertical: "center",
-        height: "100%",
-        width: "100%"
+        width: "100%",
+        flexWrap: "wrap"
     },
     logoMetro: {
         width: 200,

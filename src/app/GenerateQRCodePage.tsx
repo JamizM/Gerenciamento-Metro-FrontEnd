@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: "80%",
         alignSelf: "center",
-        marginTop: 20 // Cria espaço entre o título e o input
+        marginTop: 20
     },
     button: {
         backgroundColor: "#007bff",
