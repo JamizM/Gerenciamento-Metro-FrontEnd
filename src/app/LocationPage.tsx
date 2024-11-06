@@ -13,6 +13,8 @@ import {
 } from "react-native";
 import { IconButton } from "react-native-paper";
 
+import registerLocation from "@/api/localizacao/CadastrarLocalizacao";
+
 type Extintor = {
     estacao: string;
     plataforma: string;
@@ -58,9 +60,10 @@ export default function LocalizacaoExtintores() {
         setExtintores(updatedExtintores);
     };
 
-    const handleSendInfo = () => {
+    const handleSendInfo = async () => {
         const newErrors: { [key: string]: string } = {};
-        let isValid = true;
+        let isAtLeastOneLineFilled = false;
+        // Variável para checar se ao menos uma linha foi preenchida
 
         Object.entries(extintores).forEach(([linha, plataformas]) => {
             plataformas.forEach((extintor, idx) => {
@@ -69,26 +72,29 @@ export default function LocalizacaoExtintores() {
                     !extintor.plataforma ||
                     !extintor.descricao
                 ) {
-                    isValid = false;
                     newErrors[`${linha}-${idx}`] = "Preencha todos os campos.";
+                    // Armazena erros para campos vazios
+                } else {
+                    isAtLeastOneLineFilled = true;
+                    // Seta true se uma linha estiver preenchida
                 }
             });
         });
 
-        if (!isValid) {
+        if (!isAtLeastOneLineFilled) {
             setErrors(newErrors);
-            Alert.alert(
-                "Erro",
-                "Por favor, preencha todos os campos obrigatórios."
-            );
+            Alert.alert("Erro", "Por favor, preencha os campos obrigatórios.");
         } else {
             setErrors({});
+            await registerLocation(extintores)
+                .then((response) => alert("Enviado com sucesso!"))
+                .catch((error) => alert("Erro"));
             Alert.alert(
                 "Informações Enviadas",
                 "As informações foram salvas com sucesso."
             );
             console.log("Informações enviadas:", extintores);
-            router.navigate("/ExtinguisherPage");
+            router.navigate("/ExtinguisherPage"); // Navega para a página
         }
     };
 
@@ -212,19 +218,19 @@ export default function LocalizacaoExtintores() {
                         </View>
                     )
                 )}
-                <View style={styles.buttonContainer}>
+                {/* <View style={styles.buttonContainer}>
                     <Link href="/ExtinguisherPage" asChild>
                         <Pressable onPress={handleSendInfo}>
                             <Text style={styles.link}>Enviar</Text>
                         </Pressable>
                     </Link>
-                </View>
+                </View> */}
 
-                {/* <View style={styles.buttonContainer}>
+                <View style={styles.buttonContainer}>
                     <Pressable onPress={handleSendInfo}>
                         <Text style={styles.link}>Enviar</Text>
                     </Pressable>
-                </View> */}
+                </View>
             </ScrollView>
         </View>
     );
