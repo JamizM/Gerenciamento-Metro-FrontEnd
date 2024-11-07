@@ -25,7 +25,7 @@ interface Extinguisher {
 // então, após puxar os dados, tratá-los
 export default async function findExtinguisherByType(type: String) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://192.168.238.143:8080/api/Extinguishers/Search-Extinguisher-By-Type?extinguisherType=${type}`;
+    const url = `http://xxx.xx.x.xx:8080/api/Extinguishers/Search-Extinguisher-By-Type?extinguisherType=${type}`;
     try {
         const response = await axios.get(url, {
             headers: {

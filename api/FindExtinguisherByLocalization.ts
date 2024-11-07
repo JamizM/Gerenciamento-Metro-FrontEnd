@@ -27,7 +27,7 @@ export default async function findExtinguisherByLocalization(
     localizacao: Number
 ) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://192.168.238.143:8080/api/Extinguishers?localization=${localizacao}`;
+    const url = `http://xxx.xx.x.xx:8080/api/Extinguishers?localization=${localizacao}`;
     try {
         const response = await axios.get(url, {
             headers: {

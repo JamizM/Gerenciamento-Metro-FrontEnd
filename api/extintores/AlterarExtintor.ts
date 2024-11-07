@@ -20,7 +20,7 @@ export default async function AlterarExtintorPeloID(
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.put<Extinguisher>(
-            `http://192.168.238.143:8080/api/Extinguishers/${extinguisherId}`, //url
+            `http://xxx.xx.x.xx:8080/api/Extinguishers/${extinguisherId}`, //url
             extinguisherData,
             {
                 headers: {
