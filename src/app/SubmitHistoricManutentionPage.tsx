@@ -36,7 +36,7 @@ const SubmitHistoricManutentionPage: React.FC = () => {
 
     const handlePress = async () => {
         try {
-            const response = await cadastrarHistoricoManutencao(objeto);
+            const response = await cadastrarHistoricoManutencao(objeto); //retorna "undefined", porem funcionando
             console.log("Detalhes do extintor:", response);
         } catch (error: unknown) {
             if (error instanceof Error) {

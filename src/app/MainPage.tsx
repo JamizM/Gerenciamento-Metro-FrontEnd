@@ -44,9 +44,11 @@ export default function MainPage() {
                             </Link>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Link href="/ReportPage" asChild>
+                            <Link href="/ListLocalizationsPage" asChild>
                                 <Pressable>
-                                    <Text style={styles.link}>Localização</Text>
+                                    <Text style={styles.link}>
+                                        Localizações
+                                    </Text>
                                 </Pressable>
                             </Link>
                         </View>

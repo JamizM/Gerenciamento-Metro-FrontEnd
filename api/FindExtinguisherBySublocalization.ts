@@ -3,7 +3,7 @@ export default async function findExtinguisherBySublocalization(
     localizacao: String
 ) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `xxx.xx.x.xx:8080/api/Extinguishers/Search-Extinguisher-By-Localization?detailedLocation=${localizacao}`;
+    const url = `192.168.238.143:8080/api/Extinguishers/Search-Extinguisher-By-Localization?detailedLocation=${localizacao}`;
     try {
         const response = await axios.get(url, {
             headers: {

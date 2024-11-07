@@ -15,7 +15,7 @@ export default async function listarHistoricoManutencao(): Promise<
 
     try {
         const response = await axios.get<HistoricManutention[]>(
-            `http://xxx.xx.x.xx:8080/api/HistoricManutention`, //url
+            `http://192.168.238.143:8080/api/HistoricManutention`, //url
             {
                 headers: {
                     Authorization: `Basic ${base64Credentials}`,

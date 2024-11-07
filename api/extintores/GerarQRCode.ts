@@ -3,7 +3,7 @@ import { Buffer } from "buffer";
 
 async function GerarQrCodePorExtintor(extinguisherId: string) {
     const base64Credentials = btoa("Admin:Admin");
-    const url = `http://xxx.xx.x.xx:8080/api/Extinguishers/${extinguisherId}/qrcode`; //url
+    const url = `http://192.168.238.143:8080/api/Extinguishers/${extinguisherId}/qrcode`; //url
 
     console.log("ID do extintor:", extinguisherId);
 

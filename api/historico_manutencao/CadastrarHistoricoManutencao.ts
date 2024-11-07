@@ -14,7 +14,7 @@ export default async function cadastrarHistoricoManutencao(
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.post(
-            `http://xxx.xx.x.xx:8080/api/HistoricManutention`, //url
+            `http://192.168.238.143:8080/api/HistoricManutention`, //url
             historicoManutencaoObject,
             {
                 headers: {

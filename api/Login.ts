@@ -7,7 +7,7 @@ interface User {
     password?: string;
 }
 export default async function Login(emailUser: string, passwordUser: string) {
-    const url = `http://xxx.xx.x.xx:8080/api/Users?email=${emailUser}`;
+    const url = `http://192.168.238.143:8080/api/Users?email=${emailUser}`;
     const base64Credentials = btoa("Admin:Admin");
 
     try {

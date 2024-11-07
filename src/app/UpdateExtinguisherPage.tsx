@@ -82,6 +82,9 @@ const EditExtinguisherPage = () => {
                     handleInputChange("extinguisherType", text)
                 }
             />
+            <Text style={styles.infoText}>
+                Tipos: WATER, FOAM, N2, QUIMIC_POWDER, CO2
+            </Text>
             <TextInput
                 style={styles.input}
                 placeholder="Capacidade"
@@ -135,6 +138,9 @@ const EditExtinguisherPage = () => {
                     handleInputChange("extinguisherStatus", text)
                 }
             />
+            <Text style={styles.infoText}>
+                Tipos: OK, EXPIRED, MISPLACED, MAINTENANCE
+            </Text>
             <Button mode="contained" onPress={handleSave}>
                 Salvar Alterações
             </Button>
@@ -160,8 +166,13 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: "gray",
         borderWidth: 1,
-        marginBottom: 12,
+        marginBottom: 8,
         paddingHorizontal: 8
+    },
+    infoText: {
+        fontSize: 12,
+        color: "gray",
+        marginBottom: 12
     },
     message: {
         marginTop: 20,
