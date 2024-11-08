@@ -1,5 +1,5 @@
-import { Link } from "expo-router";
-import * as React from "react";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
     View,
     StyleSheet,
@@ -12,9 +12,36 @@ import { TextInput } from "react-native-paper";
 
 import MetroSP from "./images/metro-sp";
 
+import listarUsuario from "@/api/AuthenticateUser";
+
 export default function InitialPage() {
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const router = useRouter();
+
+    const handleLogin = async () => {
+        try {
+            const userData = await listarUsuario(email);
+
+            if (
+                userData.firstName === "Pedro" &&
+                userData.password === "12345" &&
+                userData.email === "Pedro@gmail.com"
+            ) {
+                Alert.alert("Success", "Login successful");
+                router.push("/MainPage");
+            } else {
+                setIsButtonDisabled(true);
+                Alert.alert(
+                    "Access Denied",
+                    "You are not authorized to access this page."
+                );
+            }
+        } catch (error) {
+            Alert.alert("Error", "An error occurred. Please try again.");
+        }
+    };
 
     return (
         <View style={styles.outerContainer}>
@@ -34,14 +61,23 @@ export default function InitialPage() {
                         style={styles.textInput}
                         value={password}
                         onChangeText={(password) => setPassword(password)}
+                        secureTextEntry
                     />
                 </SafeAreaView>
                 <View style={styles.buttonContainer}>
-                    <Link href="/MainPage" asChild>
-                        <Pressable>
-                            <Text style={styles.link}>Logar</Text>
-                        </Pressable>
-                    </Link>
+                    <Pressable
+                        onPress={handleLogin}
+                        disabled={isButtonDisabled}
+                    >
+                        <Text
+                            style={[
+                                styles.link,
+                                isButtonDisabled && { color: "#b0b0b0" }
+                            ]}
+                        >
+                            Logar
+                        </Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
