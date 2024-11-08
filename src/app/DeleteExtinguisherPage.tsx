@@ -7,6 +7,8 @@ import DeletarExtintorPeloId from "@/api/extintores/DeletarExtintor";
 
 const DeleteExtinguisherPage = () => {
     const [extinguisherId, setExtinguisherId] = useState("");
+    const [userName, setUserName] = useState("");
+    const [reason, setReason] = useState("");
     const [message, setMessage] = useState("");
     const navigation = useNavigation();
 
@@ -27,7 +29,7 @@ const DeleteExtinguisherPage = () => {
 
     const handleConfirmDelete = async () => {
         try {
-            await DeletarExtintorPeloId(extinguisherId);
+            await DeletarExtintorPeloId(extinguisherId, userName, reason);
             setMessage("Extintor deletado com sucesso!");
         } catch (error) {
             console.error("Erro ao deletar extintor:", error);
@@ -51,7 +53,26 @@ const DeleteExtinguisherPage = () => {
                 value={extinguisherId}
                 onChangeText={setExtinguisherId}
             />
-            <Button mode="contained" onPress={handleDelete}>
+
+            <Text style={styles.text}>Escreva o motivo</Text>
+
+            <TextInput
+                style={styles.input}
+                placeholder="Coloque seu nome"
+                value={userName}
+                onChangeText={setUserName}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Motivo para exclusão"
+                value={reason}
+                onChangeText={setReason}
+            />
+            <Button
+                mode="contained"
+                onPress={handleDelete}
+                style={styles.button}
+            >
                 Deletar Extintor
             </Button>
             {message ? <Text style={styles.message}>{message}</Text> : null}
@@ -90,6 +111,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
         position: "relative"
+    },
+    text: {
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 8
+    },
+    button: {
+        position: "absolute",
+        bottom: 20,
+        left: 16,
+        right: 16
     }
 });
 

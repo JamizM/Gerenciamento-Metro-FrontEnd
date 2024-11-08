@@ -14,12 +14,14 @@ interface Extinguisher {
 }
 
 export default async function DeletarExtintorPeloId(
-    extinguisherId: string
+    extinguisherId: string,
+    userName: string,
+    reason: string
 ): Promise<Extinguisher> {
     const base64Credentials = btoa("Admin:Admin");
     try {
         const response = await axios.delete<Extinguisher>(
-            `http://xxx.xx.x.xx:8080/api/Extinguishers/${extinguisherId}`,
+            `http://xxx.xx.x.xx:8080/api/Extinguishers/${extinguisherId}?userName=${userName}&reason=${reason}`,
             {
                 headers: {
                     Authorization: `Basic ${base64Credentials}`,
